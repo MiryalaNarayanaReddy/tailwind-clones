@@ -11,9 +11,9 @@ function PlayButton() {
     )
 }
 
-function SideBarMenu( ) {
+function SideBarMenu() {
     return (
-        <svg 
+        <svg
             aria-hidden="true"
             focusable="false"
             data-prefix="far"
@@ -34,15 +34,15 @@ function FilterIcon() {
     )
 }
 
-function FavouriteCard({hideSideBar, toggleSideBar }) {
+function FavouriteCard({ hideSideBar, toggleSideBar }) {
     return (
         <div className="bg-neutral-800 p-5 mt-6  mb-6 w-[90%] ml-auto mr-auto rounded-lg h-fit ">
 
-         
-            
 
-            <div className={`${hideSideBar? "lg:hidden":"lg:block" } w-10 h-10 hover:cursor-pointer border-neutral-600 border-2 p-2 rounded-lg hover:cusor-pointer`}
-            onClick={toggleSideBar} >
+
+
+            <div className={`${hideSideBar ? "lg:hidden" : "lg:block"} w-10 h-10 hover:cursor-pointer border-neutral-600 border-2 p-2 rounded-lg hover:cusor-pointer`}
+                onClick={toggleSideBar} >
                 <SideBarMenu />
             </div>
 
@@ -100,8 +100,8 @@ function SideBar({ toggleSideBar }) {
                 <div className="flex flex-row justify-between items-center">
 
                     <div className="text-2xl font-bold "> My Lists </div>
-                    <div className="w-6 h-6"  onClick={toggleSideBar} >
-                        <SideBarMenu/>
+                    <div className="w-6 h-6" onClick={toggleSideBar} >
+                        <SideBarMenu />
                     </div>
                 </div>
             </div>
@@ -128,65 +128,111 @@ function SideBar({ toggleSideBar }) {
 }
 
 function FitlerDialog({ difficultyFilter, setDifficultyFilter, statusFilter, setStatusFilter }) {
+
+    const handleResetFilter = () => {
+        setDifficultyFilter({ easy: false, medium: false, hard: false })
+        setStatusFilter({ solved: false, unsolved: false, attempted: false })
+    }
+
+
     return (
 
-        <div className="bg-neutral-800 p-5 mt-6  mb-6 w-[90%] ml-auto mr-auto rounded-lg h-fit ">
+        <div className="bg-neutral-700 p-5 mt-6  mb-6 w-fit ml-auto mr-auto rounded-lg h-fit ">
 
             <div className="flex flex-col gap-5">
                 <div className="text-2xl font-bold"> Filter </div>
 
                 <div className="flex flex-col gap-5">
-                    <div className="text-lg font-bold"> Difficulty </div>
-                    <div className="flex gap-5">
-                        <div className="flex items-center gap-2">
-                            <input type="checkbox" checked={difficultyFilter.easy} onChange={(e) => setDifficultyFilter({ ...difficultyFilter, easy: e.target.checked })} />
-                            <div> Easy </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <input type="checkbox" checked={difficultyFilter.medium} onChange={(e) => setDifficultyFilter({ ...difficultyFilter, medium: e.target.checked })} />
-                            <div> Medium </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <input type="checkbox" checked={difficultyFilter.hard} onChange={(e) => setDifficultyFilter({ ...difficultyFilter, hard: e.target.checked })} />
-                            <div> Hard </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="flex flex-col gap-5">
                     <div className="text-lg font-bold"> Status </div>
                     <div className="flex gap-5">
                         <div className="flex items-center gap-2">
-                            <input type="checkbox" checked={statusFilter.solved} onChange={(e) => setStatusFilter({ ...statusFilter, solved: e.target.checked })} />
+                            <input
+                                // check box bg black and tick black  and border white
+                                className="rounded-lg border-1 border-white "
+                                type="checkbox" checked={statusFilter.solved} onChange={(e) => setStatusFilter({ ...statusFilter, solved: e.target.checked })} />
                             <div> Solved </div>
                         </div>
                         <div className="flex items-center gap-2">
-                            <input type="checkbox" checked={statusFilter.unsolved} onChange={(e) => setStatusFilter({ ...statusFilter, unsolved: e.target.checked })} />
+                            <input className="rounded-lg border-1 border-white" type="checkbox" checked={statusFilter.unsolved} onChange={(e) => setStatusFilter({ ...statusFilter, unsolved: e.target.checked })} />
                             <div> Unsolved </div>
                         </div>
                         <div className="flex items-center gap-2">
-                            <input type="checkbox" checked={statusFilter.attempted} onChange={(e) => setStatusFilter({ ...statusFilter, attempted: e.target.checked })} />
+                            <input className="rounded-lg border-1 border-white" type="checkbox" checked={statusFilter.attempted} onChange={(e) => setStatusFilter({ ...statusFilter, attempted: e.target.checked })} />
                             <div> Attempted </div>
                         </div>
                     </div>
                 </div>
 
-                <button className="bg-white px-6 py-2  rounded-4xl text-black flex flex-row gap-2">
+                <div className="flex flex-col gap-5">
+                    <div className="text-lg font-bold"> Difficulty </div>
+                    <div className="flex gap-5">
+                        <div className="flex items-center gap-2">
+                            <input className="rounded-lg border-1 border-white" type="checkbox" checked={difficultyFilter.easy} onChange={(e) => setDifficultyFilter({ ...difficultyFilter, easy: e.target.checked })} />
+                            <div> Easy </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <input className="rounded-lg border-1 border-white" type="checkbox" checked={difficultyFilter.medium} onChange={(e) => setDifficultyFilter({ ...difficultyFilter, medium: e.target.checked })} />
+                            <div> Medium </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <input className="rounded-lg border-1 border-white" type="checkbox" checked={difficultyFilter.hard} onChange={(e) => setDifficultyFilter({ ...difficultyFilter, hard: e.target.checked })} />
+                            <div> Hard </div>
+                        </div>
+                    </div>
+                </div>
 
-                    Apply
+                <button className="bg-white px-6 py-2  rounded-4xl text-black flex flex-row gap-2 hover:cursor-pointer hover:bg-neutral-300 "
+                    onClick={handleResetFilter}
+                >
+
+                    Reset
                 </button>
-
-
             </div>
         </div>
 
     )
 }
 
+function FilterAppliedButton({ applied, filter, handleClearFilter }) {
+
+    if (applied)
+        return (
+            <div className="flex flex-row gap-1 justify-center items-center bg-neutral-600 py-1 px-2 ml-2 rounded-xl text-sm w-fit"> {filter}
+
+                <div className="flex flex-col justify-center gap-2">
+                    <div className="flex flex-row justify-center items-center w-4 h-4 rounded-full text-black text-sm font-bold hover:bg-neutral-400 hover:cursor-pointer bg-neutral-500 "
+                        onClick={handleClearFilter}
+                    >x</div>
+                </div>
+            </div>
+        )
+    else {
+        return null;
+    }
+}
+
+
+function RenderFitlers({ difficultyFilter, setDifficultyFilter, statusFilter, setStatusFilter }) {
+    return (
+        <>
+
+            <FilterAppliedButton applied={difficultyFilter.easy} filter="Easy" handleClearFilter={() => setDifficultyFilter({ easy: false, medium: difficultyFilter.medium, hard: difficultyFilter.hard })} />
+            <FilterAppliedButton applied={difficultyFilter.medium} filter="Medium" handleClearFilter={() => setDifficultyFilter({ easy: difficultyFilter.easy, medium: false, hard: difficultyFilter.hard })} />
+            <FilterAppliedButton applied={difficultyFilter.hard} filter="Hard" handleClearFilter={() => setDifficultyFilter({ easy: difficultyFilter.easy, medium: difficultyFilter.medium, hard: false })} />
+
+            <FilterAppliedButton applied={statusFilter.solved} filter="Solved" handleClearFilter={() => setStatusFilter({ solved: false, unsolved: statusFilter.unsolved, attempted: statusFilter.attempted })} />
+            <FilterAppliedButton applied={statusFilter.unsolved} filter="Unsolved" handleClearFilter={() => setStatusFilter({ solved: statusFilter.solved, unsolved: false, attempted: statusFilter.attempted })} />
+            <FilterAppliedButton applied={statusFilter.attempted} filter="Attempted" handleClearFilter={() => setStatusFilter({ solved: statusFilter.solved, unsolved: statusFilter.unsolved, attempted: false })} />
+
+        </>
+    )
+}
+
+
 function ListCard() {
 
     const [difficultyFilter, setDifficultyFilter] = useState({
-        easy: false,
+        easy: true,
         medium: false,
         hard: false,
     })
@@ -194,7 +240,7 @@ function ListCard() {
     const [statusFilter, setStatusFilter] = useState({
 
         solved: false,
-        unsolved: false,
+        unsolved: true,
         attempted: false,
     })
 
@@ -212,37 +258,89 @@ function ListCard() {
 
     }
 
+    useEffect(() => {
+        // console.log("difficultyFilter", difficultyFilter)
+        // console.log("statusFilter", statusFilter)
 
+        let _questionsFiltered = questions.filter((question) => {
+
+            let difficulty = false
+            let status = false
+
+            if (difficultyFilter.easy && question.difficulty === "Easy") {
+                difficulty = true
+            }
+            if (difficultyFilter.medium && question.difficulty === "Medium") {
+                difficulty = true
+            }
+            if (difficultyFilter.hard && question.difficulty === "Hard") {
+                difficulty = true
+            }
+
+            if (statusFilter.solved && question.status === "Solved") {
+                status = true
+            }
+            if (statusFilter.unsolved && question.status === "Unsolved") {
+                status = true
+            }
+            if (statusFilter.attempted && question.status === "Attempted") {
+                status = true
+            }
+
+            // console.log(question)
+            if(difficulty==false&&status==false){
+                return false
+            }
+            return true
+        })
+
+        setQuestionsFiltered(_questionsFiltered)
+
+        // console.log("questionsFiltered", _questionsFiltered)
+    },[difficultyFilter, statusFilter])
 
     return (
         <div>
 
-            {/* filter button */}
-            <button className="bg-white px-6 py-2  rounded-4xl text-black flex flex-row  font-bold items-center gap-2"
-                onClick={handleFilterButtonClick}
-            >
+            <div className="flex flex-row justify-start items-center p-5 bg-neutral-800 rounded-lg mt-5">
 
-                <div className="w-4 h-4" >
-                    <FilterIcon />
-                </div>
-                Filter
-            </button>
 
+                {/* filter button */}
+                <button className="bg-white px-6 py-2 hover:cursor-pointer rounded-4xl text-black flex flex-row  font-bold items-center gap-2"
+                    onClick={handleFilterButtonClick}
+                >
+
+                    <div className="w-4 h-4" >
+                        <FilterIcon />
+                    </div>
+                    Filter
+                </button>
+
+
+                <RenderFitlers difficultyFilter={difficultyFilter} setDifficultyFilter={setDifficultyFilter} statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
+
+            </div>
             {/* filter dialog */}
 
-
             {
-                showFilterDialog && <FitlerDialog difficultyFilter={difficultyFilter} setDifficultyFilter={setDifficultyFilter} statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
+                showFilterDialog &&
+
+
+                <div className="relative">
+                    <div className="absolute top-0 left-0">
+                        <FitlerDialog difficultyFilter={difficultyFilter} setDifficultyFilter={setDifficultyFilter} statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
+                    </div>
+                </div>
             }
 
-
-
+            <div className="flex flex-col gap-5 mt-5 overflow-y-auto h-screen hide-scrollbar">
 
             {
                 questionsFiltered.map((question, index) => {
                     return <ListItem question={question} index={index} />
                 })
             }
+            </div>
         </div>
     )
 }
@@ -260,13 +358,12 @@ function LeetcodeClone() {
     useEffect(() => {
         // console.log("hideSideBar", hideSideBar)
     }
-    , [hideSideBar])
+        , [hideSideBar])
 
     return (
         <div className="bg-black text-white grid grid-cols-6  lg:grid-cols-12">
 
             {
-
 
                 hideSideBar &&
 
@@ -277,7 +374,7 @@ function LeetcodeClone() {
             }
             <div className="col-span-6 lg:col-span-4">
 
-                <FavouriteCard hideSideBar={hideSideBar}  toggleSideBar={toggleSideBar} />
+                <FavouriteCard hideSideBar={hideSideBar} toggleSideBar={toggleSideBar} />
             </div>
 
 
