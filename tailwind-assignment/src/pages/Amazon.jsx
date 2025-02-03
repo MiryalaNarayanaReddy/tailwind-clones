@@ -1,4 +1,4 @@
-
+import { fourCards } from "./data"
 
 
 function Navbar() {
@@ -39,16 +39,16 @@ function Navbar() {
 
 function HeroCard() {
     return (
-        <img src="/amazon/hero-card.jpg" alt="amazon" className="w-full h-full -z-1" />
+        <img src="/amazon/hero-card.jpg" alt="amazon" className=" flex m-auto  w-[1600px] -z-10" />
     )
 }
 
 
 function ItemCard({ imgUrl, name }) {
     return (
-        <div className="col-span-1 bg-white hover:cursor-pointer p-2 m-2 ">
-            <img src={imgUrl} alt="amazon" className="w-full h-full rounded-lg" />
-            <div className=" text-xs w-full text-start">
+        <div className="col-span-1 hover:cursor-pointer mt-2 ">
+            <img src={imgUrl} alt="amazon" className="w-full" />
+            <div className="text-xs w-full text-start">
                 {name}
             </div>
         </div>
@@ -56,27 +56,27 @@ function ItemCard({ imgUrl, name }) {
 }
 
 
-function FourItemCard({ title, card, next }) {
+function FourItemCard({ card }) {
     return (
-        <div className="flex flex-col justify-start items-start w-fit h-fit p-5 shadow-lg ">
+        <div className="flex flex-col justify-start items-start w-96 h-[400px] p-5 shadow-md bg-white ">
 
-            <div className="text-xl font-semibold text-center p-2 m-2">
-                {title}
+            <div className="text-lg font-semibold text-start text-nowrap mb-3 w-72">
+                {card.title}
             </div>
 
-            <div className="grid grid-cols-2 gap-4 w-56">
+            <div className="grid grid-cols-2 gap-4 w-full">
 
 
-                {card.map((item, index) => {
+                {card.items.map((item, index) => {
                     return <ItemCard key={index} imgUrl={item.imgUrl} name={item.name} />
                 })}
 
             </div>
 
-            <div className="mt-5">
+            <div className="mt-3 w-72">
                 <a href="https://www.amazon.in/" className="text-xs text-center text-blue-500 hover:underline">
-                
-                    {next}
+
+                    {card.next}
                 </a>
             </div>
         </div>
@@ -86,41 +86,51 @@ function FourItemCard({ title, card, next }) {
 }
 
 
-const card1 = [
-    {
-        imgUrl: "/amazon/4/1/headset.jpg",
-        name: "Headsets"
-    },
-    {
-        imgUrl: "/amazon/4/1/keyboard.jpg",
-        name: "Keyboards"
-    },
-    {
-        imgUrl: "/amazon/4/1/mouse.jpg",
-        name: "Computer Mice"
-    },
-    {
-        imgUrl: "/amazon/4/1/chair.jpg",
-        name: "Chairs"
-    }
-]
-
-
-
-
-
 function Amazon() {
 
 
     return (
-        <>
+        <div className="bg-neutral-200">
             <Navbar />
             <HeroCard />
 
-            <FourItemCard title={"Gaming accessories"} card={card1} next={"See more"} />
+            <div className="flex flex-col -mt-96 w-[1600px] m-auto p-5">
+
+                <div className="flex flex-row w-[1600px] m-auto p-5">
+
+                    <div className=" bg-white  text-xs text-center p-2 w-full">
+                        You are on amazon.com. You can also shop on Amazon India for millions of products with fast local delivery. Click here to go to amazon.in
+                    </div>
+                </div>
+
+                <div className="flex flex-row gap-5  w-full m-auto p-5">
+
+                    <FourItemCard card={fourCards[0]} />
+                    <FourItemCard card={fourCards[1]} />
+                    <FourItemCard card={fourCards[1]} />
+                    <FourItemCard card={fourCards[1]} />
+                </div>
+
+                <div className="flex flex-row gap-5  w-full m-auto p-5">
+
+                    <FourItemCard card={fourCards[0]} />
+                    <FourItemCard card={fourCards[1]} />
+                    <FourItemCard card={fourCards[1]} />
+                    <FourItemCard card={fourCards[1]} />
+                </div>
+
+                <div className="flex flex-row gap-5  w-full m-auto p-5">
+
+<FourItemCard card={fourCards[0]} />
+<FourItemCard card={fourCards[0]} />
+<FourItemCard card={fourCards[1]} />
+<FourItemCard card={fourCards[1]} />
+</div>
 
 
-        </>
+            </div>
+
+        </div>
 
     )
 }
